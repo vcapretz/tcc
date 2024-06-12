@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default async function Page() {
   const response = await fetch("https://api.pokemontcg.io/v2/cards", {
     headers: { "X-Api-Key": process.env.POKEMON_KEY! },
@@ -12,7 +14,12 @@ export default async function Page() {
         {results.map((pokemon: any) => (
           <li key={pokemon.name}>
             <h2 className="capitalize">{pokemon.name}</h2>
-            <img src={pokemon.images.small} alt={pokemon.name} />
+            <Image
+              src={pokemon.images.small}
+              alt={pokemon.name}
+              width={245}
+              height={342}
+            />
           </li>
         ))}
       </ul>
