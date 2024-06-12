@@ -1,6 +1,8 @@
 export default async function Page() {
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon");
-  const { results } = await response.json();
+  const response = await fetch("https://api.pokemontcg.io/v2/cards", {
+    headers: { "X-Api-Key": process.env.POKEMON_KEY! },
+  });
+  const { data: results } = await response.json();
 
   return (
     <div className="p-8">
@@ -10,6 +12,7 @@ export default async function Page() {
         {results.map((pokemon: any) => (
           <li key={pokemon.name}>
             <h2 className="capitalize">{pokemon.name}</h2>
+            <img src={pokemon.images.small} alt={pokemon.name} />
           </li>
         ))}
       </ul>

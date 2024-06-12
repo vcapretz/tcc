@@ -5,9 +5,9 @@ export default function Page() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon");
-      const { results } = await response.json();
-      setPokemons(results);
+      const response = await fetch("api/pokemon");
+      const { data } = await response.json();
+      setPokemons(data);
     }
 
     fetchData();
@@ -25,6 +25,7 @@ export default function Page() {
         {pokemons.map((pokemon: any) => (
           <li key={pokemon.name}>
             <h2 className="capitalize">{pokemon.name}</h2>
+            <img src={pokemon.images.small} alt={pokemon.name} />
           </li>
         ))}
       </ul>
